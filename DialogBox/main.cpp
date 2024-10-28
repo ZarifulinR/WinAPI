@@ -1,0 +1,28 @@
+#include<Windows.h>
+#include"resource.h"
+
+BOOL WINAPI DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lparam);
+INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmd, INT nCmdShow)
+{
+	DialogBoxParam(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), NULL, (DLGPROC)DlgProc, 0);
+	return 0;
+}
+BOOL WINAPI DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lparam)
+{
+	switch (uMsg)
+	{
+	case WM_INITDIALOG:
+		break;
+	case WM_COMMAND:
+		switch (LOWORD(wParam))
+		{
+		case IDOK: MessageBox(hwnd, "Была нажата кнопка ОК! ", "info", MB_OK | MB_ICONINFORMATION); break;
+		case IDCANCEL:EndDialog(hwnd, 0);
+		}
+		break;
+	case WM_CLOSE:
+		EndDialog(hwnd, 0);
+		break;
+	}
+	return false;
+}
