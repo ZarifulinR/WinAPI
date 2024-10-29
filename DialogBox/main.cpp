@@ -20,8 +20,21 @@ BOOL WINAPI DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lparam)
 	case WM_COMMAND:
 		switch (LOWORD(wParam))
 		{
-		case IDOK: MessageBox(hwnd, "Была нажата кнопка ОК! ", "info", MB_OK | MB_ICONINFORMATION); break;
-		case IDCANCEL:EndDialog(hwnd, 0);
+		case IDC_BUTTON_COPY:
+		{
+			HWND hEditLogin = GetDlgItem(hwnd, IDC_EDIT_LOGIN);
+			HWND hEditPassword = GetDlgItem(hwnd, IDC_EDIT_PASSWORD);
+			//Функция GetDlgItem() возвращает HWND дочернего элемента окна по его ResourceID.
+			// HWND - Handler to window -Это число при помощи которого можно обратится к окну. 
+			CONST INT SIZE = 256;
+			CHAR sz_buffr[SIZE] = {};
+			SendMessage(hEditLogin, WM_GETTEXT, SIZE, (LPARAM)sz_buffr);
+			SendMessage(hEditPassword, WM_SETTEXT, 0, (LPARAM)sz_buffr);
+
+		}
+		break;
+		case IDOK: MessageBox(hwnd, "Была нажата кнопка ОК! ", "info", MB_OK | MB_ICONINFORMATION);break;
+		case IDCANCEL:EndDialog(hwnd, 0); break;
 		}
 		break;
 	case WM_CLOSE:
