@@ -1,12 +1,14 @@
 #include<Windows.h>
 #include"resource.h"
-CONST CHAR sz_LOGIN[] = "¬вудите им€ пользовател€";
+CONST CHAR sz_LOGIN[] = "¬ведите им€ пользовател€";
 BOOL WINAPI DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lparam);
+
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmd, INT nCmdShow)
 {
 	DialogBoxParam(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), NULL, (DLGPROC)DlgProc, 0);
 	return 0;
 }
+
 BOOL WINAPI DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lparam)
 {
 	switch (uMsg)
