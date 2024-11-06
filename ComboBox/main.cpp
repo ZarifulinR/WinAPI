@@ -19,13 +19,13 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICON1));
 		SendMessage(hwnd, WM_SETICON, 0, (LPARAM)hIcon);
 		HWND hCombo = GetDlgItem(hwnd, IDC_COMBO);
-		for (int  i = 0; i < sizeof(g_VALUES)/sizeof(g_VALUES[0]); i++)
+		for (int i = 0; i < sizeof(g_VALUES) / sizeof(g_VALUES[0]); i++)
 		{
-			SendMessage (hCombo, CB_ADDSTRING, 0, (LPARAM)g_VALUES[i]);
+			SendMessage(hCombo, CB_ADDSTRING, 0, (LPARAM)g_VALUES[i]);
 		}
 		SendMessage(hCombo, CB_SETCURSEL, 0, 0);
 	}
-		break;
+	break;
 	case WM_COMMAND:
 		switch (LOWORD(wParam))
 		{
@@ -36,13 +36,13 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			CHAR sz_buffer[SIZE]{};
 			HWND hCombo = GetDlgItem(hwnd, IDC_COMBO);
 			INT i = SendMessage(hCombo, CB_GETCURSEL, 0, 0);
-			SendMessage(hCombo, CB_GETLBTEXT, i,(LPARAM)sz_buffer);
+			SendMessage(hCombo, CB_GETLBTEXT, i, (LPARAM)sz_buffer);
 
 			CHAR sz_message[SIZE]{};
 			sprintf(sz_message, "Вы выбрали пункт №%i со значением\"%s\".", i, sz_buffer);
 			MessageBox(hwnd, sz_message, "Info", MB_OK | MB_ICONINFORMATION);
 		}
-			break;
+		break;
 		case IDCANCEL:EndDialog(hwnd, 0); break;
 		}
 		break;
