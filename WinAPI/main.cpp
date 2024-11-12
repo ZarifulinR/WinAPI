@@ -1,8 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<Windows.h>
 #include<cstdio>
+#include "resource.h"
 CONST CHAR g_sz_MY_Window_Class[] = "My Window";
 INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
 
 INT WINAPI WinMain(HINSTANCE hInmtance, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdShow)
 {
@@ -14,9 +16,15 @@ INT WINAPI WinMain(HINSTANCE hInmtance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 	wc.cbSize = sizeof(wc);
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
-	wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-	wc.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-	wc.hCursor = LoadIcon(NULL, IDC_ARROW);
+	//wc.hIcon = (HICON)LoadImage(hInmtance, "Bitcoin_ico.ico", IMAGE_ICON, LR_DEFAULTSIZE, LR_DEFAULTSIZE, LR_LOADFROMFILE);
+	//wc.hIconSm = (HICON)LoadImage(hInmtance, "Currency_ico.ico", IMAGE_ICON, LR_DEFAULTSIZE, LR_DEFAULTSIZE, LR_LOADFROMFILE);
+
+	//HCURSOR hCursor = (HCURSOR)LoadImage(GetModuleHandle(NULL), MAKEINTRESOURCE(IDC_CURSOR1), 0,0, LR_DEFAULTSIZE, LR_DEFAULTSIZE | LR_SHARED);
+	wc.hIcon = (HICON)LoadIcon(hInmtance, MAKEINTRESOURCE(IDI_ICON1));
+	wc.hIconSm = LoadIcon(hInmtance, MAKEINTRESOURCE(IDI_ICON2));
+	//wc.hCursor = LoadCursor(hInmtance, MAKEINTRESOURCE(IDC_CURSOR1));
+	wc.hCursor = LoadCursor(hInmtance, MAKEINTRESOURCE(IDC_CURSOR1));
+	//SetCursor(hCursor);
 	wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
 	wc.hInstance = hInmtance;
 	wc.lpszMenuName = NULL;
