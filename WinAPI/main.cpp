@@ -23,7 +23,22 @@ INT WINAPI WinMain(HINSTANCE hInmtance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 	wc.hIcon = (HICON)LoadIcon(hInmtance, MAKEINTRESOURCE(IDI_ICON1));
 	wc.hIconSm = LoadIcon(hInmtance, MAKEINTRESOURCE(IDI_ICON2));
 	//wc.hCursor = LoadCursor(hInmtance, MAKEINTRESOURCE(IDC_CURSOR1));
-	wc.hCursor = LoadCursor(hInmtance, MAKEINTRESOURCE(IDC_CURSOR1));
+	//wc.hCursor = LoadCursor(hInmtance, MAKEINTRESOURCE(IDC_CURSOR1));
+	// __________________________________________________________________________
+	// 
+	 wc.hCursor = (HCURSOR)LoadImage
+	(
+		hInmtance,
+		"CUR\\starcraft-original\\Working In Background.ani",
+		IMAGE_CURSOR,
+		LR_DEFAULTSIZE,
+		LR_DEFAULTSIZE,
+		LR_LOADFROMFILE
+		);
+	 
+	 
+
+	// =--------------------------------------------------------------------------
 	//SetCursor(hCursor);
 	wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
 	wc.hInstance = hInmtance;
