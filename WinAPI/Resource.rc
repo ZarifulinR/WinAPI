@@ -60,9 +60,9 @@ IDC_CURSOR1             CURSOR                  "cursor1.cur"
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    "Bitcoin_ico.ico"
+IDI_ICON1               ICON                    "ico\\Bitcoin_ico.ico"
 
-IDI_ICON2               ICON                    "Currency_ico.ico"
+IDI_ICON2               ICON                    "ico\\Currency_ico.ico"
 
 #endif    // Russian (Russia) resources
 /////////////////////////////////////////////////////////////////////////////
