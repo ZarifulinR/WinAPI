@@ -77,6 +77,12 @@ INT WINAPI WinMain(HINSTANCE hInstanse, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 }
 INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 {
+	static DOUBLE  a = DBL_MIN; 
+	static DOUBLE b= DBL_MIN;
+	static BOOL inpun_operation = FALSE;
+	static BOOL input = FALSE;
+	static INT operation = 0;
+
 	switch (uMsg)
 	{
 	case WM_CREATE:
@@ -201,13 +207,15 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 			SendMessage(hEditDisplay, WM_GETTEXT, SIZE, (LPARAM)sz_display);
 		if (LOWORD(wParam) >= IDC_BUTTON_0 && LOWORD(wParam) <= IDC_BUTTON_9)
 		{
+			if (inpun_operation)sz_display[0] = 0;
 			sz_digit[0] = LOWORD(wParam) - IDC_BUTTON_0 + '0';
 			if (strlen(sz_display) == 1 && sz_display[0] == '0')
 				sz_display[0] = sz_digit[0];
 			else
 				strcat(sz_display, sz_digit);
 			SendMessage(hEditDisplay, WM_SETTEXT, 0, (LPARAM)sz_display);
-
+			input = TRUE;
+			inpun_operation = FALSE;
 		}
 		if (LOWORD(wParam) == IDC_BUTTON_POINT)
 		{
@@ -225,7 +233,38 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 		
 		if (LOWORD(wParam) == IDC_BUTTON_CLEAR)
 		{
+			a = b = DBL_MIN;
+			operation = 0;
+			input = FALSE;
+			inpun_operation = FALSE;
 			SendMessage(hEditDisplay, WM_SETTEXT,0, (LPARAM)"0");
+		}
+		if (LOWORD(wParam) == IDC_BUTTON_PLUS && LOWORD(wParam) <= IDC_BUTTON_SLASH)
+		{
+			SendMessage(hEditDisplay, WM_GETTEXT, SIZE, (LPARAM)sz_display);
+			if (a == DBL_MIN)a = atof(sz_display);
+			//else b = atof(sz_display);
+			input = false;
+			SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_EQUAL), 0);
+
+			operation = LOWORD(wParam);
+			inpun_operation = TRUE;
+		}
+		if (LOWORD(wParam) == IDC_BUTTON_EQUAL)
+		{
+			if (input)b = atof(sz_display);
+			input = FALSE;
+			switch (operation)
+			{
+			case IDC_BUTTON_PLUS: a += b; break;
+			case IDC_BUTTON_MINUS: a -= b; break;
+			case IDC_BUTTON_ASTER: a *= b; break;
+			case IDC_BUTTON_SLASH: a /= b; break;
+			}
+			inpun_operation = FALSE;
+			if (a == DBL_MIN)strcpy(sz_display, "0");
+			sprintf(sz_display, "%g", a);
+			SendMessage(hEditDisplay, WM_SETTEXT, 0, (LPARAM)sz_display);
 		}
 			SetFocus(hwnd);
 		
