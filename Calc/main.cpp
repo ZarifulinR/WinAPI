@@ -147,6 +147,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 		);
 		for (int i = 0; i < 4; i++)
 		{
+			INT resourceID = IDC_BUTTON_PLUS + i;
 			CreateWindowEx
 			(
 				NULL, "Button", g_OPERATIONS[i],
@@ -155,7 +156,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 				g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL) * (3 - i),
 				g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
 				hwnd,
-				(HMENU)IDC_BUTTON_PLUS + i,
+				(HMENU)(resourceID),
 				GetModuleHandle(NULL),
 				NULL
 			);
@@ -207,8 +208,9 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 			SendMessage(hEditDisplay, WM_GETTEXT, SIZE, (LPARAM)sz_display);
 		if (LOWORD(wParam) >= IDC_BUTTON_0 && LOWORD(wParam) <= IDC_BUTTON_9)
 		{
-			if (inpun_operation)sz_display[0] = 0;
+			if (!input && inpun_operation)sz_display[0] = 0;
 			sz_digit[0] = LOWORD(wParam) - IDC_BUTTON_0 + '0';
+		
 			if (strlen(sz_display) == 1 && sz_display[0] == '0')
 				sz_display[0] = sz_digit[0];
 			else
@@ -222,6 +224,8 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 			if (strchr(sz_display, '.'))break;
 			strcat(sz_display, ".");
 			SendMessage(hEditDisplay, WM_SETTEXT, 0, (LPARAM)sz_display);
+			input = TRUE;
+			
 		}
 		//if (LOWORD(wParam) == IDI_EDIT_DISPLAY && HIWORD(wParam) == EN_SETFOCUS)
 		if (LOWORD(wParam) == IDC_BUTTON_BSP)
@@ -237,22 +241,25 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 			operation = 0;
 			input = FALSE;
 			inpun_operation = FALSE;
+			ZeroMemory(sz_display, SIZE);
 			SendMessage(hEditDisplay, WM_SETTEXT,0, (LPARAM)"0");
 		}
-		if (LOWORD(wParam) == IDC_BUTTON_PLUS && LOWORD(wParam) <= IDC_BUTTON_SLASH)
+		if (LOWORD(wParam) >= IDC_BUTTON_PLUS && LOWORD(wParam) <= IDC_BUTTON_SLASH)
 		{
-			SendMessage(hEditDisplay, WM_GETTEXT, SIZE, (LPARAM)sz_display);
+			//SendMessage(hEditDisplay, WM_GETTEXT, SIZE, (LPARAM)sz_display);
 			if (a == DBL_MIN)a = atof(sz_display);
 			//else b = atof(sz_display);
-			input = false;
-			SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_EQUAL), 0);
+			//input = false;
+			if(inpun_operation) SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_EQUAL), 0);
 
 			operation = LOWORD(wParam);
+			input = FALSE;
 			inpun_operation = TRUE;
 		}
 		if (LOWORD(wParam) == IDC_BUTTON_EQUAL)
 		{
-			if (input)b = atof(sz_display);
+			//if (input)b = atof(sz_display);
+			if(input || b == DBL_MIN && !input)b=atof(sz_display);
 			input = FALSE;
 			switch (operation)
 			{
@@ -263,10 +270,10 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 			}
 			inpun_operation = FALSE;
 			if (a == DBL_MIN)strcpy(sz_display, "0");
-			sprintf(sz_display, "%g", a);
+			else sprintf(sz_display, "%g", a);
 			SendMessage(hEditDisplay, WM_SETTEXT, 0, (LPARAM)sz_display);
 		}
-			SetFocus(hwnd);
+		SetFocus(hwnd);
 		
 	}
 	break;
