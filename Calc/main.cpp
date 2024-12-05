@@ -208,6 +208,12 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 			SendMessage(hEditDisplay, WM_GETTEXT, SIZE, (LPARAM)sz_display);
 		if (LOWORD(wParam) >= IDC_BUTTON_0 && LOWORD(wParam) <= IDC_BUTTON_9)
 		{
+
+			if (!input && !inpun_operation)
+			{
+				SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_CLEAR), 0);
+				sz_display[0] = 0;
+			}
 			if (!input && inpun_operation)sz_display[0] = 0;
 			sz_digit[0] = LOWORD(wParam) - IDC_BUTTON_0 + '0';
 		
@@ -217,7 +223,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 				strcat(sz_display, sz_digit);
 			SendMessage(hEditDisplay, WM_SETTEXT, 0, (LPARAM)sz_display);
 			input = TRUE;
-			inpun_operation = FALSE;
+			//inpun_operation = FALSE;
 		}
 		if (LOWORD(wParam) == IDC_BUTTON_POINT)
 		{
@@ -250,7 +256,8 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 			if (a == DBL_MIN)a = atof(sz_display);
 			//else b = atof(sz_display);
 			//input = false;
-			if(inpun_operation) SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_EQUAL), 0);
+			//if(inpun_operation) 
+				SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_EQUAL), 0);
 
 			operation = LOWORD(wParam);
 			input = FALSE;
@@ -279,17 +286,28 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 	break;
 	case WM_KEYDOWN:
 	{
-		if (wParam >= 0x30 && wParam <= 0x39)
+		if (GetKeyState(VK_SHIFT) < 0)
+		{
+			if (wParam == 0x38)SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_ASTER, 0);
+		}
+		//if (wParam >= 0x30 && wParam <= 0x39)
 
-			SendMessage(hwnd, WM_COMMAND, wParam - 0x30 + IDC_BUTTON_0, 0);
-		if (wParam >= 0x60 && wParam <= 0x69)
+			//SendMessage(hwnd, WM_COMMAND, wParam - 0x30 + IDC_BUTTON_0, 0);
+		else if (wParam >= 0x60 && wParam <= 0x69)
 			SendMessage(hwnd, WM_COMMAND, wParam - 0x60 + IDC_BUTTON_0, 0);
+		else if (wParam >= '0' && wParam <= '9')
+			SendMessage(hwnd, WM_COMMAND, wParam - '0' + IDC_BUTTON_0, 0);
 		switch (wParam)
 		{
+		case VK_OEM_PLUS:SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_PLUS), 0); break;
+		case VK_OEM_MINUS:SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_MINUS), 0); break;
 		case VK_DECIMAL:
 		case VK_OEM_PERIOD:SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_POINT), 0); break;
 		case VK_ESCAPE:SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_CLEAR), 0); break;
 		case VK_BACK:SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_BSP), 0); break;
+		case VK_RETURN: SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_EQUAL), 0); break;
+		case VK_OEM_2: SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_SLASH), 0); break;
+			
 
 		}
 	}
