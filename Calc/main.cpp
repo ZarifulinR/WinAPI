@@ -357,7 +357,7 @@ CONST CHAR* g_BUTTON_FILENAME[] =
 	"button_minus",
 	"button_aster",
 	"button_slash",
-	"button_bsp	",
+	"button_bsp",
 	"button_clr",
 	"button_equal",
 };
