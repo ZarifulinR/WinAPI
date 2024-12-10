@@ -7,9 +7,10 @@ CONST INT g_i_INTERVAL = 5;
 CONST INT g_i_BUTTON_SIZE = 50;
 CONST INT g_i_BUTTON_DOUBLE_SIZE = g_i_BUTTON_SIZE * 2 + g_i_INTERVAL;
 
-
+CONST INT	g_i_HEIGHT = 32;
+CONST INT g_i_FONT_WIDTH = g_i_HEIGHT * 2 / 5;
 CONST INT g_i_DISPLAY_WIDTH = g_i_BUTTON_SIZE * 5 + g_i_INTERVAL * 4;
-CONST INT  g_i_DISPLAY_HEIGHT = 22;
+CONST INT  g_i_DISPLAY_HEIGHT = g_i_HEIGHT+2;
 
 CONST INT g_i_START_Y = 10;
 CONST INT g_i_START_X = 10;
@@ -103,6 +104,24 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 			GetModuleHandle(NULL),
 			NULL
 		);
+		AddFontResourceEx("Fonts\\Calculator.ttf", FR_PRIVATE, 0);
+		HFONT  hFont= CreateFont(
+			g_i_HEIGHT, g_i_FONT_WIDTH,
+			0,// Наклон шрифта в десятках градуса
+			0, //Ориентация шрифта
+			FW_BOLD, //Толшина
+			FALSE, //курсив
+			FALSE,// Подчеркнуты
+			FALSE,// Перечеркнутый
+			ANSI_CHARSET,
+			OUT_TT_PRECIS,
+			CLIP_TT_ALWAYS,
+			ANTIALIASED_QUALITY,
+			FF_DONTCARE,
+			"Calculator"
+		);
+		SendMessage(hEdit, WM_SETFONT, (WPARAM)hFont, TRUE);
+
 		CHAR sz_digit[2] = "0";
 		for (int i = 6; i >= 0; i -= 3)
 		{
@@ -213,6 +232,20 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 
 	}
 	break;
+	case WM_CTLCOLOREDIT:
+	{
+		HDC hdc = (HDC)wParam;
+		HWND hEdit = (HWND)Lparam;
+		if (GetDlgCtrlID(hEdit) == IDI_EDIT_DISPLAY)
+		{
+			SetTextColor(hdc, RGB(0, 255, 0));
+			 SetBkColor (hdc, RGB(0, 0, 100));
+			 HBRUSH hbrBackground = CreateSolidBrush(RGB(30, 30, 30, ));
+			 return(INT_PTR)hbrBackground;
+		}
+		
+	}
+		break;
 	case WM_COMMAND:
 	{
 		CONST INT SIZE = 256;
@@ -426,7 +459,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 	}
 	break;
 	case WM_DESTROY:
+	{
+		HWND hEdit = GetDlgItem(hwnd, IDI_EDIT_DISPLAY );
+		HDC hdc = GetDC(hEdit);
+		ReleaseDC(hEdit, hdc);
 		PostQuitMessage(0);
+	}
 		break;
 	case WM_CLOSE:
 		DestroyWindow(hwnd);
