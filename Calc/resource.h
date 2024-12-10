@@ -3,6 +3,16 @@
 // Used by Resource.rc
 //
 #define IDI_ICON1                       101
+
+#define IDR_CONTEXT_MENU				200
+#define IDR_SQUARE_BLUE					201
+#define IDR_METAL_MISTRAL				202
+#define IDR_EXIT						210
+
+
+
+
+
 #define IDI_EDIT_DISPLAY				999
 #define IDC_BUTTON_0					1000
 #define IDC_BUTTON_1					1001

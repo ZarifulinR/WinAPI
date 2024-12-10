@@ -330,6 +330,25 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 		}
 	}
 	break;
+	case WM_CONTEXTMENU:
+	{
+		HMENU hSubmenuSkins = CreatePopupMenu();
+		InsertMenu(hSubmenuSkins, 0, MF_BYPOSITION| MF_STRING, IDR_METAL_MISTRAL, "Metal mistral");
+		InsertMenu(hSubmenuSkins, 0, MF_BYPOSITION|MF_STRING, IDR_SQUARE_BLUE, "Sqare blue");
+		HMENU hmenu = CreatePopupMenu();
+		InsertMenu(hmenu,0, MF_POPUP | MF_POPUP, (UINT_PTR)hSubmenuSkins, "Skins");
+		InsertMenu(hmenu, 1, MF_BYPOSITION | MF_SEPARATOR, 0, 0);
+		InsertMenu(hmenu, 2, MF_BYPOSITION | MF_STRING, IDR_EXIT, "Exit");
+		switch(TrackPopupMenu(hmenu, TPM_LEFTALIGN | TPM_BOTTOMALIGN | TPM_RETURNCMD, LOWORD(Lparam), HIWORD(Lparam), 0, hwnd, 0))
+		{
+		case IDR_SQUARE_BLUE:SetSkin(hwnd, "square_blue"); break;
+		case IDR_METAL_MISTRAL:SetSkin(hwnd, "metal_mistral"); break;
+		case IDR_EXIT: DestroyWindow(hwnd);
+		}
+		DestroyMenu(hSubmenuSkins);
+		DestroyMenu(hmenu);
+	}
+		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
