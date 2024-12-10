@@ -237,12 +237,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 				strcat(sz_display, sz_digit);
 			SendMessage(hEditDisplay, WM_SETTEXT, 0, (LPARAM)sz_display);
 			input = TRUE;
+			
+			
 			//inpun_operation = FALSE;
 		}
 		if (LOWORD(wParam) == IDC_BUTTON_POINT)
 		{
-			if (strchr(sz_display, '.'))break;
-			strcat(sz_display, ".");
+
+			if (strchr(sz_display, '.')&& input)break;
+			if (inpun_operation && a == atof(sz_display))strcpy(sz_display, "0.");
+			else strcat(sz_display, ".");
 			SendMessage(hEditDisplay, WM_SETTEXT, 0, (LPARAM)sz_display);
 			input = TRUE;
 
