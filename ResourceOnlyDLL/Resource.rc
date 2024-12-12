@@ -1,0 +1,113 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian (Russia) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BUTTON_0            BITMAP                  "ButtonsBMP\\metal_mistral\\button_0.bmp"
+
+IDB_BUTTON_1            BITMAP                  "ButtonsBMP\\metal_mistral\\button_1.bmp"
+
+IDB_BUTTON_2            BITMAP                  "ButtonsBMP\\metal_mistral\\button_2.bmp"
+
+IDB_BUTTON_3            BITMAP                  "ButtonsBMP\\metal_mistral\\button_3.bmp"
+
+IDB_BUTTON_4            BITMAP                  "ButtonsBMP\\metal_mistral\\button_4.bmp"
+
+IDB_BUTTON_5            BITMAP                  "ButtonsBMP\\metal_mistral\\button_5.bmp"
+
+IDB_BUTTON_6            BITMAP                  "ButtonsBMP\\metal_mistral\\button_6.bmp"
+
+IDB_BUTTON_7            BITMAP                  "ButtonsBMP\\metal_mistral\\button_7.bmp"
+
+IDB_BUTTON_8            BITMAP                  "ButtonsBMP\\metal_mistral\\button_8.bmp"
+
+IDB_BUTTON_9            BITMAP                  "ButtonsBMP\\metal_mistral\\button_9.bmp"
+
+IDB_BUTTON_POINT        BITMAP                  "ButtonsBMP\\metal_mistral\\button_point.bmp"
+
+IDB_BUTTON_PLUS         BITMAP                  "ButtonsBMP\\metal_mistral\\button_plus.bmp"
+
+IDB_BUTTON_MINU         BITMAP                  "ButtonsBMP\\metal_mistral\\button_minus.bmp"
+
+IDB_BUTTON_ASTER        BITMAP                  "ButtonsBMP\\metal_mistral\\button_aster.bmp"
+
+IDB_BUTTON_SLASH        BITMAP                  "ButtonsBMP\\metal_mistral\\button_slash.bmp"
+
+IDB_BUTTON_BSP          BITMAP                  "ButtonsBMP\\metal_mistral\\button_bsp.bmp"
+
+IDB_BUTTON_CLR          BITMAP                  "ButtonsBMP\\metal_mistral\\button_clr.bmp"
+
+IDB_BUTTON_EQUAL        BITMAP                  "ButtonsBMP\\metal_mistral\\button_equal.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "ICO\\calc3_43474.ico"
+
+#endif    // Russian (Russia) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

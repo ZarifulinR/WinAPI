@@ -31,6 +31,8 @@ CONST COLORREF g_WINDOW_BACKGROUND[] = { RGB(0,0,150),RGB(75,75,75) };
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam);
 VOID SetSkin(HWND hwnd, CONST CHAR* skin);
+VOID SetSkinFromDLL(HWND hwnd, CONST CHAR* skin);
+
 INT WINAPI WinMain(HINSTANCE hInstanse, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdShow)
 {
 	// 1) Регистрация класса окна.
@@ -463,13 +465,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 		BOOL skin_index = TrackPopupMenu(hmenu, TPM_LEFTALIGN | TPM_BOTTOMALIGN | TPM_RETURNCMD, LOWORD(Lparam), HIWORD(Lparam),0,hwnd,0);
 		switch (skin_index)
 		{
-		case IDR_SQUARE_BLUE:SetSkin(hwnd, "square_blue");  break;
-		case IDR_METAL_MISTRAL:SetSkin(hwnd, "metal_mistral"); break;
+		case IDR_SQUARE_BLUE:SetSkinFromDLL(hwnd, "square_blue");  break;
+		case IDR_METAL_MISTRAL:SetSkinFromDLL(hwnd, "metal_mistral"); break;
 		case IDR_EXIT: DestroyWindow(hwnd);
 		}
 		DestroyMenu(hSubmenuSkins);
 		DestroyMenu(hmenu);
 
+		if (skin_index >= IDR_SQUARE_BLUE && skin_index <= IDR_METAL_MISTRAL)
+		{
 
 		color_index = skin_index - IDR_CONTEXT_MENU - 1;
 		HWND hEditdisplay = GetDlgItem(hwnd, IDI_EDIT_DISPLAY);
@@ -479,6 +483,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 		CHAR sz_buffer[MAX_PATH]{};
 		SendMessage(hEditdisplay, WM_GETTEXT, MAX_PATH, (LPARAM)sz_buffer);
 		SendMessage(hEditdisplay, WM_SETTEXT, MAX_PATH, (LPARAM)sz_buffer);
+		}
 	}
 	break;
 	case WM_DESTROY:
@@ -536,4 +541,26 @@ VOID SetSkin(HWND hwnd, CONST CHAR* skin)
 		);
 		SendMessage(hButton0, BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)bmpButton);
 	}
+}
+VOID SetSkinFromDLL(HWND hwnd, CONST CHAR* skin)
+{
+	CHAR filename[MAX_PATH]{};
+	sprintf(filename, "ButtonsBMP\\%s", skin);
+	HMODULE hinst = LoadLibrary(filename);
+	for (int i = IDC_BUTTON_0; i <= IDC_BUTTON_EQUAL; i++)
+	{
+
+		HBITMAP buttonBMP = (HBITMAP)LoadImage
+		(
+			hinst,
+			MAKEINTRESOURCE(i + 100),
+			IMAGE_BITMAP,
+			i > IDC_BUTTON_0 ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
+			i < IDC_BUTTON_EQUAL  ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
+			NULL
+
+		);
+		SendMessage(GetDlgItem(hwnd, i), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)buttonBMP);
+	}
+	FreeLibrary(hinst);
 }
