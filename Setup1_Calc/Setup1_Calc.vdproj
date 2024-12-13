@@ -15,19 +15,31 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_2D723B41E1F04DDC8DDCB0C5A53232CB"
+        "MsmKey" = "8:_27C5103BC52F481DA1C1D1E909F02D74"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_3C67F811976A46C28113C6E9FC7E73C4"
+        "MsmKey" = "8:_4F099572F7144C1C8595B17478E1CA91"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_4D98EF2101A84C268F9696A5D35D9AD6"
+        "MsmKey" = "8:_C9F05FB692044A94BA1D14F952E4A5B9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D2A23E248B514095B3001CD1E5205D08"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DCD208A936BD404289928A992ECF0555"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -39,7 +51,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\Setup1_Calc.msi"
+        "OutputFilename" = "8:Release\\Calc_Custom.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -55,7 +67,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\Setup1_Calc.msi"
+        "OutputFilename" = "8:Release\\Calc_Custom.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -86,10 +98,30 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2D723B41E1F04DDC8DDCB0C5A53232CB"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_27C5103BC52F481DA1C1D1E909F02D74"
             {
-            "SourcePath" = "8:..\\Calc\\ButtonsBMP\\metal_mistral.dll"
-            "TargetName" = "8:metal_mistral.dll"
+            "SourcePath" = "8:..\\Release\\ButtonsBMP\\square_blue.dll"
+            "TargetName" = "8:square_blue.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_62A9162FF52042CAAD0694051C902647"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4F099572F7144C1C8595B17478E1CA91"
+            {
+            "SourcePath" = "8:..\\Calc\\ICO\\calc1_43473.ico"
+            "TargetName" = "8:calc1_43473.ico"
             "Tag" = "8:"
             "Folder" = "8:_720C82B0E768402BB879E444E9B6B264"
             "Condition" = "8:"
@@ -106,12 +138,32 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3C67F811976A46C28113C6E9FC7E73C4"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C9F05FB692044A94BA1D14F952E4A5B9"
             {
-            "SourcePath" = "8:..\\Calc\\ButtonsBMP\\square_blue.dll"
-            "TargetName" = "8:square_blue.dll"
+            "SourcePath" = "8:..\\Release\\ButtonsBMP\\metal_mistral.dll"
+            "TargetName" = "8:metal_mistral.dll"
             "Tag" = "8:"
-            "Folder" = "8:_720C82B0E768402BB879E444E9B6B264"
+            "Folder" = "8:_62A9162FF52042CAAD0694051C902647"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DCD208A936BD404289928A992ECF0555"
+            {
+            "SourcePath" = "8:..\\Release\\Fonts\\FontOnlyDLL.dll"
+            "TargetName" = "8:FontOnlyDLL.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_C3890AC05CF24C69BCE76AE5AD66DA90"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -164,6 +216,28 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_62A9162FF52042CAAD0694051C902647"
+                    {
+                    "Name" = "8:ButtonsBMP"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_3308EAE7225E4CC39458F83F1084D6E6"
+                        "Folders"
+                        {
+                        }
+                    }
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_C3890AC05CF24C69BCE76AE5AD66DA90"
+                    {
+                    "Name" = "8:Fonts"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_801E78130A434891989A266FFC724454"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
         }
@@ -181,26 +255,26 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Setup1_Calc"
+        "ProductName" = "8:Custom_Calc"
         "ProductCode" = "8:{5D30285C-AE71-49B1-945F-2EC466F78C4F}"
-        "PackageCode" = "8:{BA535B70-3812-4E05-94C2-77923B504DF2}"
+        "PackageCode" = "8:{B060AFE2-E1DC-41E2-B1F8-CEEA90BBF55E}"
         "UpgradeCode" = "8:{660ECA5F-05BD-4B45-9002-38C273F892FC}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "InstallAllUsers" = "11:FALSE"
+        "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Default Company Name"
+        "Manufacturer" = "8:Kompaund"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:Setup1_Calc"
+        "Title" = "8:Custom_Calc"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Default Company Name"
+        "ARPCONTACT" = "8:Rinat"
         "Keywords" = "8:"
-        "ARPCOMMENTS" = "8:"
+        "ARPCOMMENTS" = "8:Добро пожаловать"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_4F099572F7144C1C8595B17478E1CA91"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -303,6 +377,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_0A3F905994A843C6BC2C07C2657797BD"
+            {
+            "Name" = "8:Calc_Custom"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_D2A23E248B514095B3001CD1E5205D08"
+            "Folder" = "8:_40CF89DB69E04DBC999C2B371D71A514"
+            "WorkingFolder" = "8:_720C82B0E768402BB879E444E9B6B264"
+            "Icon" = "8:_4F099572F7144C1C8595B17478E1CA91"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_EC1D6D9D60AD4C3F865CB6FD1DA5C5E1"
+            {
+            "Name" = "8:Custom_Calc"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_D2A23E248B514095B3001CD1E5205D08"
+            "Folder" = "8:_097CA4E7F4714E979B851CE26046ED46"
+            "WorkingFolder" = "8:_720C82B0E768402BB879E444E9B6B264"
+            "Icon" = "8:_4F099572F7144C1C8595B17478E1CA91"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
@@ -702,9 +804,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_4D98EF2101A84C268F9696A5D35D9AD6"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_D2A23E248B514095B3001CD1E5205D08"
             {
-            "SourcePath" = "8:..\\Debug\\Calc.exe"
+            "SourcePath" = "8:..\\Release\\Calc.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_720C82B0E768402BB879E444E9B6B264"
