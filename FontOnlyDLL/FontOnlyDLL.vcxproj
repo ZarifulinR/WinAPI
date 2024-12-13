@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{94274fcf-9f92-4f0e-bcf0-5d30971587cf}</ProjectGuid>
+    <ProjectGuid>{ea609576-2df9-40ea-8a9c-ea6a37e41d40}</ProjectGuid>
     <RootNamespace>FontOnlyDLL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

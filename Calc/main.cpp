@@ -116,10 +116,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 			NULL
 		);
 		///////////////////////////////////////////////////
-		//AddFontResourceEx("Fonts\\Calculator.ttf", FR_PRIVATE, 0);
+		AddFontResourceEx("Fonts\\Calculator.ttf", FR_PRIVATE, 0);
 		////////////////////////////////////////////////////
-		HINSTANCE hInstFont = LoadLibrary("Fonts\\FontOnlyDLL.dll");
-		HRSRC hFontRes = FindResource(hInstFont, MAKEINTRESOURCE(101), "BINARY");
+		HINSTANCE hInstFont = LoadLibrary("..\\Debug\\FontOnlyDLL.dll");
+		// .. Выход в родительский каталог 
+		HRSRC hFontRes = FindResource(hInstFont, MAKEINTRESOURCE(99), "BINARY");
 		HGLOBAL hFntMem = LoadResource(hInstFont, hFontRes);
 		VOID* fntData = LockResource(hFntMem);
 		DWORD nFonts = 0;
@@ -143,8 +144,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 
 		);
 		// RemoveFontMemResourceEx(hMyFont);
-		FreeLibrary(hInstFont);
 		SendMessage(hEdit, WM_SETFONT, (WPARAM)hFont, TRUE);
+		FreeLibrary(hInstFont);
+
 		CHAR sz_digit[2] = "0";
 		for (int i = 6; i >= 0; i -= 3)
 		{

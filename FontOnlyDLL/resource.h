@@ -3,8 +3,7 @@
 // Used by Resource.rc
 
 
-#define IDF_DIGITAL   99
-
+#define IDF_DIGITAL		99
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
