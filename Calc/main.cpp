@@ -95,7 +95,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 	static INT operation = 0;
 	///////////////////////////////
 	static INT color_index = 0;
-
+	static HANDLE hMyFont = NULL;
 	switch (uMsg)
 	{
 	case WM_CREATE:
@@ -115,7 +115,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 			GetModuleHandle(NULL),
 			NULL
 		);
-		AddFontResourceEx("Fonts\\Calculator.ttf", FR_PRIVATE, 0);
+		///////////////////////////////////////////////////
+		//AddFontResourceEx("Fonts\\Calculator.ttf", FR_PRIVATE, 0);
+		////////////////////////////////////////////////////
+		HINSTANCE hInstFont = LoadLibrary("Fonts\\FontOnlyDLL.dll");
+		HRSRC hFontRes = FindResource(hInstFont, MAKEINTRESOURCE(101), "BINARY");
+		HGLOBAL hFntMem = LoadResource(hInstFont, hFontRes);
+		VOID* fntData = LockResource(hFntMem);
+		DWORD nFonts = 0;
+		DWORD len = SizeofResource(hInstFont, hFontRes);
+		hMyFont = AddFontMemResourceEx(fntData, len, nullptr, &nFonts);
 		HFONT  hFont= CreateFont(
 			g_i_HEIGHT, g_i_FONT_WIDTH,
 			0,// Наклон шрифта в десятках градуса
@@ -129,10 +138,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 			CLIP_TT_ALWAYS,
 			ANTIALIASED_QUALITY,
 			FF_DONTCARE,
-			"Calculator"
-		);
-		SendMessage(hEdit, WM_SETFONT, (WPARAM)hFont, TRUE);
+			"Digital-7"
+			//"Calculator"
 
+		);
+		// RemoveFontMemResourceEx(hMyFont);
+		FreeLibrary(hInstFont);
+		SendMessage(hEdit, WM_SETFONT, (WPARAM)hFont, TRUE);
 		CHAR sz_digit[2] = "0";
 		for (int i = 6; i >= 0; i -= 3)
 		{
@@ -488,6 +500,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 	break;
 	case WM_DESTROY:
 	{
+		RemoveFontMemResourceEx(hMyFont);
 		HWND hEdit = GetDlgItem(hwnd, IDI_EDIT_DISPLAY );
 		HDC hdc = GetDC(hEdit);
 		ReleaseDC(hEdit, hdc);
