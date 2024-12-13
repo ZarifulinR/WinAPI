@@ -2,6 +2,10 @@
 #include<Windows.h>
 #include"resource.h"
 #include<iostream>
+#include<Shlwapi.h>
+
+#pragma comment (lib,"Shlwapi.lib")
+
 const CHAR g_sz_CLASS_NAME[] = "Calc PV_319";
 CONST INT g_i_INTERVAL = 5;
 CONST INT g_i_BUTTON_SIZE = 50;
@@ -32,6 +36,7 @@ CONST COLORREF g_WINDOW_BACKGROUND[] = { RGB(0,0,150),RGB(75,75,75) };
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam);
 VOID SetSkin(HWND hwnd, CONST CHAR* skin);
 VOID SetSkinFromDLL(HWND hwnd, CONST CHAR* skin);
+VOID GetExeDirectory(CHAR* buffer, DWORD size);
 
 INT WINAPI WinMain(HINSTANCE hInstanse, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdShow)
 {
@@ -116,10 +121,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 			NULL
 		);
 		///////////////////////////////////////////////////
-		AddFontResourceEx("Fonts\\Calculator.ttf", FR_PRIVATE, 0);
+		//AddFontResourceEx("Fonts\\Calculator.ttf", FR_PRIVATE, 0);
 		////////////////////////////////////////////////////
-		HINSTANCE hInstFont = LoadLibrary("..\\Debug\\FontOnlyDLL.dll");
 		// .. Выход в родительский каталог 
+		CHAR filepath[MAX_PATH]{};
+		GetExeDirectory(filepath, MAX_PATH);
+		CHAR dllpath[MAX_PATH]{};
+		PathCombine(dllpath, filepath, "Fonts\\FontOnlyDLL.dll");
+		//HINSTANCE hInstFont = LoadLibrary("..\\Debug\\FontOnlyDLL.dll");
+		HINSTANCE hInstFont = LoadLibrary(dllpath);
+
 		HRSRC hFontRes = FindResource(hInstFont, MAKEINTRESOURCE(99), "BINARY");
 		HGLOBAL hFntMem = LoadResource(hInstFont, hFontRes);
 		VOID* fntData = LockResource(hFntMem);
@@ -253,7 +264,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM Lparam)
 			NULL
 
 		);
-		SetSkin(hwnd, "square_blue");
+		SetSkinFromDLL(hwnd, "square_blue");
 
 	}
 	break;
@@ -559,8 +570,10 @@ VOID SetSkin(HWND hwnd, CONST CHAR* skin)
 }
 VOID SetSkinFromDLL(HWND hwnd, CONST CHAR* skin)
 {
+	CHAR filepath[MAX_PATH]{};
 	CHAR filename[MAX_PATH]{};
-	sprintf(filename, "ButtonsBMP\\%s", skin);
+	GetExeDirectory(filepath, MAX_PATH);
+	sprintf(filename, "%s\\ButtonsBMP\\%s",filepath, skin);
 	HMODULE hinst = LoadLibrary(filename);
 	for (int i = IDC_BUTTON_0; i <= IDC_BUTTON_EQUAL; i++)
 	{
@@ -578,4 +591,9 @@ VOID SetSkinFromDLL(HWND hwnd, CONST CHAR* skin)
 		SendMessage(GetDlgItem(hwnd, i), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)buttonBMP);
 	}
 	FreeLibrary(hinst);
+}
+VOID GetExeDirectory(CHAR* buffer, DWORD size)
+{
+	GetModuleFileName(NULL, buffer, size);
+	PathRemoveFileSpec(buffer);
 }
